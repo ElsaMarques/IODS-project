@@ -1,7 +1,28 @@
-# Insert chapter 2 title here
+---
+output: 
+  html_document: 
+    highlight: monochrome
+    number_sections: yes
+    theme: flatly
+    toc: yes
+---
+**Course Diary**
 
-*Describe the work you have done this week and summarize your learning.*
+#Tools and methods for open and reproducible research
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using  
+**Work done during the week and learning summary.**
+
+ - Completed the course DataCamp assay: "R short and sweet"";
+
+ - Completed also the optional "Introduction to R" course in DataCamp available to all users; 
+
+ - Installed RStudio, GitHub desktop, and explored the RMarkdown Basics & R Code Chunks provided help lists.  
+
+    - Succesfully forked the IODS project to personal repository & made own repository online link  
+
+
+#Regression and model validation
+#Logistic regression
+#Clustering and classification
+#Dimensionality reduction techniques
+#Final assignment

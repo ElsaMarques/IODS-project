@@ -1,0 +1,66 @@
+---
+title: "Course Diary"
+author: "**Elsa Marques**"
+date: "1 November 2017"
+output:
+  html_document:
+    highlight: monochrome
+    number_sections: yes
+    theme: flatly
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+**First impressions about the course**
+
+*At first **overwhelming** for non experienced programmers or advanced users in the computer field. Nonetheless, after a few hours of careful reading instructions and self learning sessions in the provided tools one can start to understand that **sky is the limit** for the stubborn and motivated individuals.*
+
+<https://github.com/ElsaMarques/IODS-project.git>
+
+#Tools and methods for open and reproducible research
+
+##Summary of what was accomplished this week.
+
+ - Completed the following courses on DataCamp: _"R short and sweet"_  ; _"Introduction to R"_ & 1^st^ levels of _DataCamp (EXTRA): Helsinki Social Statistics_ 
+
+ - Installed RStudio, GitHub desktop, and explored the RMarkdown Basics & R Code Chunks provided help lists.  
+
+    - Succesfully forked the IODS project to personal repository & made own repository online link  
+    
+    - Created the new file RMarkdown (README.Rmd)
+
+_**Learned how to extract information from data**_
+
+Modifications that seemed adequate to the provided data base
+
+```{r cars, echo = FALSE}
+str(cars)
+summary(cars)
+
+
+```
+
+_**Learned how to modify Plots**_
+
+Shown the modifications that seemed adequate to the provided example: 
+
+- Modify the data points colors 
+
+- Insert plot title 
+
+- Change x , y axis legends 
+
+
+```{r pressure, echo=FALSE}
+plot(pressure, xlab = "Temperature" , ylab = "Pressure" ,  col = "tomato", bg = "grey", main = "Temperature - Pressure curve")
+```
+
+#Regression and model validation
+#Logistic regression
+#Clustering and classification
+#Dimensionality reduction techniques
+#Final assignment
