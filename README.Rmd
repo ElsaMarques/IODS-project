@@ -19,7 +19,14 @@ knitr::opts_chunk$set(echo = TRUE)
 
 *At first **overwhelming** for non experienced programmers or advanced users in the computer field. Nonetheless, after a few hours of careful reading instructions and self learning sessions in the provided tools one can start to understand that **sky is the limit** for the stubborn and motivated individuals.*
 
+_**Elsa Marques repository link:**_
+
 <https://github.com/ElsaMarques/IODS-project.git>
+
+_**Course diary link:_** 
+
+<https://ElsaMarques.github.io/IODS-project/>
+
 
 #Tools and methods for open and reproducible research
 

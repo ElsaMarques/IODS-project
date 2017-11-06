@@ -13,6 +13,11 @@ output:
 ---
 
 ***
+
+```{r child = "README.Rmd"}
+```
+
+***
   
 ```{r child = "chapter1.Rmd"}
 ```
@@ -23,3 +28,5 @@ output:
 ```
 
 ***
+
+

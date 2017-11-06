@@ -1,8 +1,17 @@
 
-# About the project
+#About the project
 
 *At first **overwhelming** for non experienced programmers or advanced users in the computer field. Nonetheless, after a few hours of careful reading instructions and self learning sessions in the provided tools one can start to understand that **sky is the limit** for the stubborn and motivated individuals.*
 
 ## <https://github.com/ElsaMarques/IODS-project.git>
 
-# Chapter 2 
+# Chapter 1 - Tools and methods for open and reproducible research
+
+*This chapter will allow you to learn how to use the Softwares (RStudio & GitHub desktop) and get the first contact with RMarkdown codes*
+
+
+
+
+
+
+
