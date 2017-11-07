@@ -5,17 +5,12 @@ output:
     author: ElsaMarques 
     theme: cosmo
     toc: true
-    toc_depth: 4
+    toc_depth: 3
     fig_caption: true
     fig_width: 6
     fig_height: 4
     code_folding: hide
 ---
-
-***
-
-```{r child = "README.Rmd"}
-```
 
 ***
   
@@ -28,5 +23,23 @@ output:
 ```
 
 ***
+  
+```{r child = "chapter3.Rmd"}
+```
 
+***
 
+```{r child = "chapter4.Rmd"}
+```
+
+***
+
+```{r child = "chapter5.Rmd"}
+```
+
+***
+
+```{r child = "chapter6.Rmd"}
+```
+
+***

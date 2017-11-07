@@ -8,31 +8,13 @@ output:
 ---
 **Course Diary**
 
-#Tools and methods for open and reproducible research
-
-**Work done during the week and learning summary.**
-
- - Completed the course DataCamp assay: "R short and sweet"";
-
- - Completed also the optional "Introduction to R" course in DataCamp available to all users; 
-
- - Installed RStudio, GitHub desktop, and explored the RMarkdown Basics & R Code Chunks provided help lists.  
-
-    - Succesfully forked the IODS project to personal repository & made own repository online link  
-
-##Summary of what was accomplished this week.
-
- - Completed the following courses on DataCamp: _"R short and sweet"_  ; _"Introduction to R"_ & 1^st^ levels of _DataCamp (EXTRA): Helsinki Social Statistics_ 
-
- - Installed RStudio, GitHub desktop, and explored the RMarkdown Basics & R Code Chunks provided help lists.  
-
-    - Succesfully forked the IODS project to personal repository & made own repository online link  
-    
-    - Created the new file RMarkdown (README.Rmd)
+#Regression and model validation [NOT FINALIZED FOR PEER-REVIEW]
 
 _**Learned how to extract information from data**_
 
-Modifications that seemed adequate to the provided data base
+Did the following modifications that seemed adequate to the provided data base
+
+  - 
 
 ```{r cars, echo = FALSE}
 str(cars)

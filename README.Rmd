@@ -1,5 +1,5 @@
 ---
-title: "Course Diary"
+title: "IODS course project"
 author: "**Elsa Marques**"
 date: "1 November 2017"
 output:

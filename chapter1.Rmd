@@ -3,11 +3,42 @@
 
 *At first **overwhelming** for non experienced programmers or advanced users in the computer field. Nonetheless, after a few hours of careful reading instructions and self learning sessions in the provided tools one can start to understand that **sky is the limit** for the stubborn and motivated individuals.*
 
+This course will allow you to master R language and give you insights in the possible ways you can use it.
+
+##My Repository: 
 ## <https://github.com/ElsaMarques/IODS-project.git>
 
-# Chapter 1 - Tools and methods for open and reproducible research
 
-*This chapter will allow you to learn how to use the Softwares (RStudio & GitHub desktop) and get the first contact with RMarkdown codes*
+#CHAPTER 1 - Tools and methods for open and reproducible research
+
+*This chapter allows you to learn how to use the Softwares (RStudio & GitHub desktop & GitHub) and get the first contact with RMarkdown codes*
+
+
+**Work done during the week and learning summary.**
+
+  - Completed the following courses on DataCamp: 
+    - _"R short and sweet"_  ; 
+    
+    - _"Introduction to R"_ (Extra: available to all users);
+    
+    - _"DataCamp (EXTRA): Helsinki Social Statistics"_ 
+
+ - Installed RStudio, GitHub desktop, and explored the RMarkdown Basics & R Code Chunks provided help lists.  
+ 
+    - Edited my profile picture and explored GitHub settings (Extra)
+
+    - Succesfully forked the IODS project to personal repository & found my own repository and course diary link
+    
+    - Created the new file RMarkdown (README.Rmd)
+    
+    - Altered the team of the course diary in online GitHub (Extra)
+    
+    - Comited to my branch of the master repostiory my final changes 
+    
+    - 
+    
+    
+
 
 
 
