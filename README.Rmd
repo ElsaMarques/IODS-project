@@ -4,9 +4,7 @@ author: "**Elsa Marques**"
 date: "1 November 2017"
 output:
   html_document:
-    highlight: monochrome
-    number_sections: yes
-    theme: flatly
+    highlight: espresso
     toc: yes
 ---
 
@@ -25,7 +23,7 @@ _**Elsa Marques repository link:**_
 
 _**Course diary link:_** 
 
-<https://ElsaMarques.github.io/IODS-project/>
+<https://elsamarques.github.io/IODS-project/>
 
 
 

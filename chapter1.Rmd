@@ -1,27 +1,43 @@
+---
+output: 
+  html_document: 
+    highlight: espresso
+    number_sections: yes
+---
 
-#About the project
-
-*At first **overwhelming** for non experienced programmers or advanced users in the computer field. Nonetheless, after a few hours of careful reading instructions and self learning sessions in the provided tools one can start to understand that **sky is the limit** for the stubborn and motivated individuals.*
-
-This course will allow you to master R language and give you insights in the possible ways you can use it.
-
-##My Repository: 
-## <https://github.com/ElsaMarques/IODS-project.git>
-
-
-#CHAPTER 1 - Tools and methods for open and reproducible research
-
-*This chapter allows you to learn how to use the Softwares (RStudio & GitHub desktop & GitHub) and get the first contact with RMarkdown codes*
+# About the project {.unnumbered}
 
 
-**Work done during the week and learning summary.**
+*At first **overwhelming** for non experienced programmers or advanced users in the computer field. Nonetheless, after a few hours of careful reading instructions and many self learning sessions in the provided tools one can start to understand that **sky is the limit** for the stubborn and motivated individuals.*
+
+This course will allow you to master R language and give you insights in the possible ways you can use it to analyse different kinds of data.
+
+ 
+- My Repository: <https://github.com/ElsaMarques/IODS-project.git>
+
+- My learning diary: <https://elsamarques.github.io/IODS-project/>
+
+
+
+
+# Tools and methods for open and reproducible research
+
+*This chapter allows you to learn how to use the course Softwares (_RStudio_ & _GitHub desktop_ & _GitHub_) and get the first contact with some of the basic RMarkdown codes*
+
+
+## **Work done during the week and learning summary.**
 
   - Completed the following courses on DataCamp: 
     - _"R short and sweet"_  ; 
     
-    - _"Introduction to R"_ (Extra: available to all users);
+    - _"Introduction to R"_ (Extra ; highly recommend the daily exercises after finishing up this course, perfect and quick way to remind little things you learn till this moment);
     
-    - _"DataCamp (EXTRA): Helsinki Social Statistics"_ 
+    - _"DataCamp (EXTRA): Helsinki Social Statistics"_ (Similar to the mandatory _"R short and Sweet"_ but nothing like practicing to solidify the learn code, fucntions, etc.. )
+    
+    - _1st free chapters of "Intermediate R"" ; "Cleaning Data in R" & "Data manipulation in R With dplyr" _  (Extra ; gave a clear idea on how complex this can become and once again good practice/reminder of basics learnt till now)
+
+
+
 
  - Installed RStudio, GitHub desktop, and explored the RMarkdown Basics & R Code Chunks provided help lists.  
  
@@ -33,10 +49,15 @@ This course will allow you to master R language and give you insights in the pos
     
     - Altered the team of the course diary in online GitHub (Extra)
     
-    - Comited to my branch of the master repostiory my final changes 
+    - Commited to my branch of the master repostiory my intermediate and final changes 
     
-    - 
+    - Started working in the chapter2.Rmd by accident but sucessfully hide it from the 1st peer-review deadline 
     
+    - Managed to fix an error message in RStudio start up (Mac OS El Capitan version incompatibility)
+    
+    
+
+
     
 
 

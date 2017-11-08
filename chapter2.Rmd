@@ -2,21 +2,33 @@
 output: 
   html_document: 
     highlight: monochrome
-    number_sections: yes
-    theme: flatly
     toc: yes
 ---
 **Course Diary**
 
-#Regression and model validation [NOT FINALIZED FOR PEER-REVIEW]
+# CHAPTER 2 - Regression and model validation [NOT FINALIZED FOR PEER-REVIEW]
+
+*During this chapter the amount of information to be memorize is definetly higher and more complex. The datacamp exercise, including the videos included in it touch the surface of what you can do to build graphs to visualize analyse your data. Note that during this chapter you will definetily need to consult external help cheats (mostly provided during the datacamp and your mooc links)*
+
+
+**Work done during the week and learning summary.**
+
+
+During the Data wrangling exercise you will create an analysis dataset for the Analysis exercise. During the Analysis exercise you will explore the data, perform analysis and interpret the results.
+
+During the data wrangling exercises you will preprocess a data set for further analysis. To complete the data wrangling part, you only need to produce an R script, no output in your course diary is needed. Use code comments to make your code easier to read. Always write your name, date and a one sentence file description as a comment on the top of the R script (include a reference to the data source). We recommend using RStudio for writing R code.
+
 
 _**Learned how to extract information from data**_
 
 Did the following modifications that seemed adequate to the provided data base
 
   - 
+  
+  
 
 ```{r cars, echo = FALSE}
+#analyse "Cars" data
 str(cars)
 summary(cars)
 
@@ -33,8 +45,9 @@ Shown the modifications that seemed adequate to the provided example:
 
 - Change x , y axis legends 
 
-
+#Plot a curve to analyse the correlations between temprature and pressure
 ```{r pressure, echo=FALSE}
+#Plot a curve to analyse the correlations between temprature and pressure
 plot(pressure, xlab = "Temperature" , ylab = "Pressure" ,  col = "tomato", bg = "grey", main = "Temperature - Pressure curve")
 ```
 

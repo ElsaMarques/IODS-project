@@ -1,0 +1,1 @@
+Elsa Marques, November 8th 2017 - Regression chapter RStudio exercise 
