@@ -21,7 +21,7 @@ _**Elsa Marques repository link:**_
 
 <https://github.com/ElsaMarques/IODS-project.git>
 
-_**Course diary link:_** 
+_**Course diary link:**_ 
 
 <https://elsamarques.github.io/IODS-project/>
 
