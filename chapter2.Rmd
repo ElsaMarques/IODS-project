@@ -6,31 +6,43 @@ output:
 ---
 **Course Diary**
 
-# CHAPTER 2 - Regression and model validation [NOT FINALIZED FOR PEER-REVIEW]
+# CHAPTER 2 - Regression and model validation
 
-*During this chapter the amount of information to be memorize is definetly higher and more complex. The datacamp exercise, including the videos included in it touch the surface of what you can do to build graphs to visualize analyse your data. Note that during this chapter you will definetily need to consult external help cheats (mostly provided during the datacamp and your mooc links)*
+*During this chapter the amount of information to be memorized is higher and more complex. The datacamp exercise, including the videos included in it touch the surface of what you can do to build graphs to visualize and analyse your data. Note that during this chapter you will definetily need to consult external help cheats (mostly provided during the datacamp and your mooc links)*
 
 
 **Work done during the week and learning summary.**
 
+Data wrangling exercise: 
 
-During the Data wrangling exercise you will create an analysis dataset for the Analysis exercise. During the Analysis exercise you will explore the data, perform analysis and interpret the results.
+1. Step is to load the data set you will work on:
+ 
+ - Either from the provided url 
+```{r, echo = FALSE}
+# Read the data from URL provided link
+lrn14 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
+```
+  
+ - Or from the file locally stored in your harddrive 
+ 
+```{r}
+# Read the data from file located in yout hard drive
+read.csv("learning2014", header=TRUE, sep = "\t" , row.names = 1)
+```
+ 
 
-During the data wrangling exercises you will preprocess a data set for further analysis. To complete the data wrangling part, you only need to produce an R script, no output in your course diary is needed. Use code comments to make your code easier to read. Always write your name, date and a one sentence file description as a comment on the top of the R script (include a reference to the data source). We recommend using RStudio for writing R code.
 
 
 _**Learned how to extract information from data**_
 
 Did the following modifications that seemed adequate to the provided data base
 
-  - 
-  
-  
 
-```{r cars, echo = FALSE}
+```{r, echo = FALSE}
 #analyse "Cars" data
-str(cars)
-summary(cars)
+read.csv("learning2014.csv", header=TRUE, sep = "\t")
+str(learning2014)
+summary(learning2014)
 
 
 ```
