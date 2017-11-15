@@ -13,42 +13,51 @@ output:
 
 **Work done during the week and learning summary.**
 
-Data wrangling exercise: 
+1. _**Data wrangling exercise:**_ 
 
-1. Step is to load the data set you will work on:
+Load the data set:
  
- - Either from the provided url 
+ - All data provided in the url 
  
 ```{r, echo = FALSE}
-# Read the data from URL provided link
-lrn14 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep=",", header=TRUE)
+#read the data from URL provided link
+lrn14 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
 ```
   
- - Or from the file locally stored in your harddrive 
+ - Data after data wrangling exercises (stored locally)
  
-```{r}
-# Read the data from file located in yout hard drive
-read.csv("learning2014.csv", header=TRUE, sep = ",")
+```{r, echo = FALSE}
+#read the data from file located in your hard drive
+learning2014 <- read.csv("learning2014.csv")
 ```
  
+   - Questions related to the following topics were placed together:     
+        - deep_questions , surface_questions , strategic_questions 
+        
 
+2. _**How to extract information from data:**_
 
+Since the full data set can be overwelming to explore, viewing the structure, summary and the first values of the data can be helpful to identify what are your main interests in this questionary answers. 
 
-_**Learned how to extract information from data**_
-
-Did the following modifications that seemed adequate to the provided data base
+```{r, echo = FALSE}
+#view the structure and summary of the non filtered "learning2014" data
+str(lrn14)
+summary(lrn14)
+head(lrn14)
+```
 
 
 ```{r, echo = FALSE}
-#analyse "Cars" data
-read.csv("learning2014.csv", header=TRUE, sep = "\t")
+#view the structure and summary of the non filtered "learning2014" data
 str(learning2014)
 summary(learning2014)
-
-
+head(learning2014)
 ```
 
-_**Learned how to modify Plots**_
+A careful observation of the loaded data shows you that from all the 63 original variables I filtered 7 variables of interest (Gender , Age, Attitude, Points, Deep questions, Surface questions, Strategic questions). 
+
+
+_**View data in Plots format**_
 
 Shown the modifications that seemed adequate to the provided example: 
 
@@ -61,7 +70,9 @@ Shown the modifications that seemed adequate to the provided example:
 #Plot a curve to analyse the correlations between temprature and pressure
 ```{r pressure, echo=FALSE}
 #Plot a curve to analyse the correlations between temprature and pressure
-plot(pressure, xlab = "Temperature" , ylab = "Pressure" ,  col = "tomato", bg = "grey", main = "Temperature - Pressure curve")
+plot(data = lrn14, attitude, points, aes(xlab = "Attitude" , ylab = "Points" ,  col = "tomato", bg = "grey", main = "Points Vs Attitude""))
 ```
 
+library(ggplot2)
 
+qplot(attitude, points, data = learning2014) + geom_smooth(method = "lm")
