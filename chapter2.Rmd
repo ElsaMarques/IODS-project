@@ -13,20 +13,23 @@ output:
 
 **Work done during the week and learning summary.**
 
-1. _**Data wrangling exercise:**_ 
+1. _**Data wrangling exercise**_ 
 
 Load the data set:
  
  - All data provided in the url 
  
-```{r, echo = FALSE}
+```{r}
 #read the data from URL provided link
 lrn14 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
 ```
   
- - Data after data wrangling exercises (stored locally)
  
-```{r, echo = FALSE}
+ 
+Data after data wrangling exercises (stored locally)
+
+ 
+```{r}
 #read the data from file located in your hard drive
 learning2014 <- read.csv("learning2014.csv")
 ```
@@ -35,7 +38,7 @@ learning2014 <- read.csv("learning2014.csv")
         - deep_questions , surface_questions , strategic_questions 
         
 
-2. _**How to extract information from data:**_
+2. _**How to extract information from data**_
 
 Since the full data set can be overwelming to explore, viewing the structure, summary and the first values of the data can be helpful to identify what are your main interests in this questionary answers. 
 
@@ -46,9 +49,10 @@ summary(lrn14)
 head(lrn14)
 ```
 
+- View the structure and summary of the filtered "learning2014" data
 
 ```{r, echo = FALSE}
-#view the structure and summary of the non filtered "learning2014" data
+#view the structure and summary of the filtered "learning2014" data
 str(learning2014)
 summary(learning2014)
 head(learning2014)
@@ -59,7 +63,7 @@ A careful observation of the loaded data shows you that from all the 63 original
 
 _**View data in Plots format**_
 
-Graphs to visualize the overall relationshiot betwwen all the selected variables 
+Graphs to visualize the overall relationships betwwen all the selected variables 
 
 ```{r, echo = FALSE}
 #Draw all possible scatterplots to explore the data frame
@@ -69,14 +73,16 @@ p <- ggpairs(data = learning2014, mapping = aes(col = gender, alpha = 0.3), lowe
 p
 ```
 
-With this overview of the date you can already check that mainly in the Attitude varibale the differences between gender are more noticeable; 
+Focusing on the diagonal set of graphs (7 variables by gender):
+You can already check that mainly in the Attitude varibale the differences between gender are more noticeable; 
 
-From all the variables anlaysed strategic_questions , surface_questions and attitude (mainly the female data) shows normal a distributon, all the other data seems skewed 
+From all the variables analysed, strategic_questions is the one that shows a more normal distributon, all the other data seems slighly to dramatically skewed. 
 
 
-- Plot a curve to analyse the correlations between students Attitude and Points 
+- Based in the previous observations it seems interesting to visualize how the attitute (that seems to vary most with gender) correlates with the Points. 
+
 ```{r pressure, echo=FALSE}
-# initialize plot with data and aesthetic mapping
+# plot with the 
 p1 <- ggplot(data = learning2014, aes(x = Attitude, y = Points, col = gender))
 
 # define the visualization type (points)
@@ -87,34 +93,11 @@ p3 <- p2 + geom_smooth(method = "lm")
 p3
 ```
 
-
-```{r}
-
-my_model <- lm(points ~ attitude + stra + age, data = learning2014)
-
-# draw diagnostic plots using the plot() function. Choose the plots 1, 2 and 5
-par(mfrow = c(2,2))
-plot(my_model2, which =c(1:2, 5)) 
-```
-
-```{r}
-# learning2014 is available
-
-# Create model object m
-m <- lm(points ~ attitude, data = learning2014)
-
-# print out a summary of the model
-summary(m)
-
-# New observations
-new_attitudes <- c("Mia" = 3.8, "Mike"= 4.4, "Riikka" = 2.2, "Pekka" = 2.9)
-new_data <- data.frame(attitude = new_attitudes)
+You can verify in the graph how the correlation trend varies between female (red line) and male (blue line).
 
 
-# Print out the new data
-(new_data)
 
-# Predict the new students exam points based on attitude
-predict(m, newdata = new_data)
-```
+
+
+
 

@@ -44,8 +44,6 @@ str(learning2014)
 learning2014 <- filter(learning2014, Points > 0)
 learning2014
 
-
-
 write.csv(learning2014, file = "learning2014.csv")
 read.csv("learning2014.csv")
 
@@ -53,9 +51,6 @@ str(learning2014)
 head(learning2014)
 
 
-library(ggplot2)
-
-qplot(attitude, points, data = learning2014) + geom_smooth(method = "lm")
 
 
 
