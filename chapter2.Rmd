@@ -18,16 +18,17 @@ Data wrangling exercise:
 1. Step is to load the data set you will work on:
  
  - Either from the provided url 
+ 
 ```{r, echo = FALSE}
 # Read the data from URL provided link
-lrn14 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep="\t", header=TRUE)
+lrn14 <- read.table("http://www.helsinki.fi/~kvehkala/JYTmooc/JYTOPKYS3-data.txt", sep=",", header=TRUE)
 ```
   
  - Or from the file locally stored in your harddrive 
  
 ```{r}
 # Read the data from file located in yout hard drive
-read.csv("learning2014", header=TRUE, sep = "\t" , row.names = 1)
+read.csv("learning2014.csv", header=TRUE, sep = ",")
 ```
  
 
