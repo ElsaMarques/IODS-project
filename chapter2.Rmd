@@ -59,20 +59,62 @@ A careful observation of the loaded data shows you that from all the 63 original
 
 _**View data in Plots format**_
 
-Shown the modifications that seemed adequate to the provided example: 
+Graphs to visualize the overall relationshiot betwwen all the selected variables 
 
-- Modify the data points colors 
-
-- Insert plot title 
-
-- Change x , y axis legends 
-
-#Plot a curve to analyse the correlations between temprature and pressure
-```{r pressure, echo=FALSE}
-#Plot a curve to analyse the correlations between temprature and pressure
-plot(data = lrn14, attitude, points, aes(xlab = "Attitude" , ylab = "Points" ,  col = "tomato", bg = "grey", main = "Points Vs Attitude""))
+```{r, echo = FALSE}
+#Draw all possible scatterplots to explore the data frame
+library(GGally)
+library(ggplot2)
+p <- ggpairs(data = learning2014, mapping = aes(col = gender, alpha = 0.3), lower = list(combo = wrap("facethist", bins = 20)))
+p
 ```
 
-library(ggplot2)
+With this overview of the date you can already check that mainly in the Attitude varibale the differences between gender are more noticeable; 
 
-qplot(attitude, points, data = learning2014) + geom_smooth(method = "lm")
+From all the variables anlaysed strategic_questions , surface_questions and attitude (mainly the female data) shows normal a distributon, all the other data seems skewed 
+
+
+- Plot a curve to analyse the correlations between students Attitude and Points 
+```{r pressure, echo=FALSE}
+# initialize plot with data and aesthetic mapping
+p1 <- ggplot(data = learning2014, aes(x = Attitude, y = Points, col = gender))
+
+# define the visualization type (points)
+p2 <- p1 + geom_point()
+
+# add a regression line
+p3 <- p2 + geom_smooth(method = "lm")
+p3
+```
+
+
+```{r}
+
+my_model <- lm(points ~ attitude + stra + age, data = learning2014)
+
+# draw diagnostic plots using the plot() function. Choose the plots 1, 2 and 5
+par(mfrow = c(2,2))
+plot(my_model2, which =c(1:2, 5)) 
+```
+
+```{r}
+# learning2014 is available
+
+# Create model object m
+m <- lm(points ~ attitude, data = learning2014)
+
+# print out a summary of the model
+summary(m)
+
+# New observations
+new_attitudes <- c("Mia" = 3.8, "Mike"= 4.4, "Riikka" = 2.2, "Pekka" = 2.9)
+new_data <- data.frame(attitude = new_attitudes)
+
+
+# Print out the new data
+(new_data)
+
+# Predict the new students exam points based on attitude
+predict(m, newdata = new_data)
+```
+
