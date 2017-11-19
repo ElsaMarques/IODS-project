@@ -6,16 +6,16 @@ output:
 ---
 **Course Diary**
 
-# CHAPTER 2 - Regression and model validation
+# Regression and model validation
 
 *During this chapter the amount of information to be memorized is higher and more complex. The datacamp exercise, including the videos included in it touch the surface of what you can do to build graphs to visualize and analyse your data. Note that during this chapter you will definetily need to consult external help cheats (mostly provided during the datacamp and your mooc links)*
 
 
-**Work done during the week and learning summary.**
+## **Work done during the week and learning summary.**
 
 1. _**Data wrangling exercise**_ 
 
-Load the data set:
+Load the data set provided (questionary answers regarding learning approaches and students accomplishments in a statistics course):
  
  - All data provided in the url 
  
@@ -74,12 +74,12 @@ p
 ```
 
 Focusing on the diagonal set of graphs (7 variables by gender):
-You can already check that mainly in the Attitude varibale the differences between gender are more noticeable; 
+You can already check that mainly in the Attitude variable the differences between gender are more noticeable; 
 
 From all the variables analysed, strategic_questions is the one that shows a more normal distributon, all the other data seems slighly to dramatically skewed. 
 
 
-- Based in the previous observations it seems interesting to visualize how the attitute (that seems to vary most with gender) correlates with the Points. 
+- Based in the previous observations it seems interesting to visualize how the attitute (that seems to vary most with gender) correlates with the acquired Points. 
 
 ```{r pressure, echo=FALSE}
 # plot with the 
@@ -91,13 +91,31 @@ p2 <- p1 + geom_point()
 # add a regression line
 p3 <- p2 + geom_smooth(method = "lm")
 p3
+
 ```
 
-You can verify in the graph how the correlation trend varies between female (red line) and male (blue line).
+You can verify in the graph how the correlation trend varies between female (red line) and male (blue line). The grey area in the graph shows you how this data varies. 
+
+
+```{r}
+lm(formula = Points ~ Attitude + stra + surf, data = learning2014)
+```
+
+Analyses of the linear regression tell you that by each attitude point up the sutdents have a chance of getting mote 0.34 point , as for one level up of strategic questions 0.85 and inversevly correlated for the surface points losing -0.59
+
+_**Graphical model validation**_
 
 
 
+_**Residuals vs Fitted plot**_
 
+
+
+_**Normal Q-Q plot**_
+
+```{r}
+my_fit <- lm(formula = Points ~ Attitude + stra + surf, data = learning2014)
+```
 
 
 
