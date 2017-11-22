@@ -60,9 +60,12 @@ alc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_grade = mean(G3)
 
 ###2.1 *Analyse the relationship between the levels of high alcohol consuption and failure, absences, sex and grades of the students.* 
 
+One could associate that an increased alcohol consuption will lead to an increase in failures, absences from school and also with a decrease in the final grades (grade form the 3rd period = G3). The differences of alcohol intake amongs sex and age seems also interesting to explore (once there is the stereotyped idea that males drink more and younger students are not leagally allowed to drink). 
+
+
 ```{r,echo=FALSE}
 # find the model with glm()
-m <- glm(high_use ~ failures + absences + sex + G3, data = alc, family = "binomial")
+m <- glm(high_use ~ age + absences + sex + G3, data = alc, family = "binomial")
 
 # print out a summary of the model
 summary(m)
@@ -71,8 +74,13 @@ summary(m)
 coef(m)
 ```
 
+failures     0.34596    0.20496   1.688  0.09142 .  
+absences     0.09135    0.02293   3.983 6.81e-05 ***
+sexM         0.95321    0.24278   3.926 8.63e-05 ***
+G3    
 
-The purpose of your analysis is to study the relationships between high/low alcohol consumption and some of the other variables in the data. To do this, choose 4 interesting variables in the data and for each of them, present your personal hypothesis about their relationships with alcohol consumption. (0-1 point)
+
+
 
 ##3. **Inspect numerically and graphically the distributions of the previously chosen variables and their relationship with alcohol consumption**
 
@@ -84,8 +92,12 @@ g1 <- ggplot(alc, aes(x = high_use, y = G3, fill = sex))
 g1 + geom_boxplot() + ylab("grade") + ggtitle("Student grades by alcohol consumption and sex")
 
 ```
+```{r, echo=FALSE}
+library(gmodels)
+CrossTable(alc$high_use, alc$age)
+```
 
-
+You can observe that high use of alcohol didn't alter the average final grades (G3 in the data set) of the female students, and only sligly decreases the amount of the maximum grades. As for the male students you can see a clear drop in the average grades as also the maximum grades (you can see this from the variation lines)
 
 ```{r,echo=FALSE}
 # initialise a plot of high_use and absences
@@ -94,41 +106,44 @@ g2 <- ggplot(alc, aes(x = high_use, y = absences, fill = sex))
 # define the plot as a boxplot and draw it
 g2 + geom_boxplot() + ggtitle("Student absences by alcohol consumption and sex")
 ```
+```{r, echo=FALSE}
+CrossTable(alc$high_use, alc$absences)
+```
 
+Once again the high use of alcohol didn't alter the average number of absences of the female students, and only sligly increased the amount of the maximum number of absences (top of the box plot). As before, the alcohol consuption has more effect on the male students. You can see that the absences number increased (noticeable from the increase in the average of absences, the mimunim number of absences and maximum number of absences). 
 
 ```{r,echo=FALSE}
-# initialise a plot of high_use and absences
+# initialise a plot of high_use and age
 g2 <- ggplot(alc, aes(x = high_use, y = age, fill = sex))
 
 # define the plot as a boxplot and draw it
 g2 + geom_boxplot() + ggtitle("Student age by alcohol consumption and sex")
 ```
 
-
-```{r, echo=FALSE}
-# initialise a plot of high_use and absences
-g2 <- ggplot(alc, aes(x = high_use, y = health, fill = sex))
-
-# define the plot as a boxplot and draw it
-g2 + geom_boxplot() + ggtitle("Student failure by alcohol consumption and sex")
+```{r, echo = FALSE}
+CrossTable(alc$high_use, alc$age)
 ```
 
-Numerically and graphically explore the distributions of your chosen variables and their relationships with alcohol consumption (use for example cross-tabulations, bar plots and box plots). Comment on your findings and compare the results of your exploration to your previously stated hypotheses. (0-5 points)
+You can see that while the heavy alcohol consumption in the females is distributed from 16 to 17 yeard old, in the male students the high alcohol intake spreads from 16 to 18 years old. If you compare this ages with the ones from the low or non alcohol consumption, you can realize that all the male students with 17y or older are high user of alcohol.  
 
 
 
-##4. ** 
+##4. *Use logistic regression to statistically explore the relationship between chosen variables and the binary high/low alcohol consumption variable as the target variable.*
 
 ```{r,echo=FALSE}
 # find the model with glm()
-m <- glm(high_use ~ failures + absences + sex, data = alc, family = "binomial")
+m <- glm(high_use ~ age + absences + sex + G3, data = alc, family = "binomial")
 
 # print out a summary of the model
 summary(m)
 
 # print out the coefficients of the model
 coef(m)
+```
 
+###4.1 *Present and interpret the coefficients of the model as odds ratios and provide confidence intervals for them.*
+
+```{r, echo=FALSE}
 # compute odds ratios (OR)
 OR <- coef(m) %>% exp
 
@@ -140,37 +155,11 @@ cbind(OR, CI)
 ```
 
 
-Use logistic regression to statistically explore the relationship between your chosen variables and the binary high/low alcohol consumption variable as the target variable. Present and interpret a summary of the fitted model. Present and interpret the coefficients of the model as odds ratios and provide confidence intervals for them. Interpret the results and compare them to your previously stated hypothesis. Hint: If your model includes factor variables see for example the first answer of this stackexchange thread on how R treats and how you should interpret these variables in the model output (or use some other resource to study this). (0-5 points)
 
-##5. **
+
+##5. *Compute the total proportion of inaccurately classified individuals (= the training error) and comment on all the results.*
 
 ```{r,echo=FALSE}
-
-```
-
-
-Using the variables which, according to your logistic regression model, had a statistical relationship with high/low alcohol consumption, explore the predictive power of you model. Provide a 2x2 cross tabulation of predictions versus the actual values and optionally display a graphic visualizing both the actual values and the predictions. Compute the total proportion of inaccurately classified individuals (= the training error) and comment on all the results. Compare the performance of the model with performance achieved by some simple guessing strategy. (0-3 points)
-
-##6. 
-
-```{r}
-
-```
-
-Bonus: Perform 10-fold cross-validation on your model. Does your model have better test set performance (smaller prediction error using 10-fold cross-validation) compared to the model introduced in DataCamp (which had about 0.26 error). Could you find such a model? (0-2 points to compensate any loss of points from the above exercises)
-
-##7.
-
-```{r}
-
-```
-
-Super-Bonus: Perform cross-validation to compare the performance of different logistic regression models (= different sets of predictors). Start with a very high number of predictors and explore the changes in the training and testing errors as you move to models with less predictors. Draw a graph displaying the trends of both training and testing errors by the number of predictors in the model. (0-4 points to compensate any loss of points from the above exercises)
-
-
-
-
-
 
 # predict() the probability of high_use
 probabilities <- predict(m, type = "response")
@@ -182,37 +171,17 @@ alc <- mutate(alc, probability = probabilities)
 alc <- mutate(alc, prediction = probability > 0.5)
 
 # see the last ten original classes, predicted probabilities, and class predictions
-select(alc, failures, absences, sex, high_use, probability, prediction) %>% head(10)
+select(alc, age, absences, sex, high_use, probability, prediction) %>% head(10)
 
 # tabulate the target variable versus the predictions
 table(high_use = alc$high_use, prediction = alc$probability > 0.5)
+```
 
+You can check in the tables in how many student cases the prediction wouldn't have assumed a correlation for high use of alcohol and the selected variables. In the 2 x 2 summary table you can see that in 84 cases the prediction claimed no relation but in the real cases you could detect a relationship between the variables. 30 cases there was in both prediction and data analysis a relation between high use of alcohol and the chosen variables.  
 
+##6. *Perform 10-fold cross-validation on your model*
 
-# initialize a plot of 'high_use' versus 'probability' in 'alc'
-g <- ggplot(alc, aes(x = probability, y = high_use, col = prediction))
-
-# define the geom as points and draw the plot
-g + geom_point()
-
-# tabulate the target variable versus the predictions
-table(high_use = alc$high_use, prediction = alc$prediction) %>%
-  prop.table() %>% addmargins () 
-
-
-# the logistic regression model m and dataset alc with predictions are available
-
-# define a loss function (mean prediction error)
-loss_func <- function(class, prob) {
-  n_wrong <- abs(class - prob) > 0.5
-  mean(n_wrong)
-}
-
-# call loss_func to compute the average number of wrong predictions in the (training) data
-loss_func(class = alc$high_use, prob = alc$probability)
-
-
-# the logistic regression model m and dataset alc (with predictions) are available
+```{r, echo=FALSE}
 
 # define a loss function (average prediction error)
 loss_func <- function(class, prob) {
@@ -229,4 +198,37 @@ cv <- cv.glm(data = alc, cost = loss_func, glmfit = m, K = 10)
 
 # average number of wrong predictions in the cross validation
 cv$delta[1]
+```
+
+Performing an higher number of cross validation you can decrease the number of errors in our predictions. 
+
+##7. *Draw a graph displaying the trends of both training and testing errors by the number of predictors in the model.*
+
+```{r, echo=FALSE}
+# initialize a plot of 'high_use' versus 'probability' in 'alc'
+g <- ggplot(alc, aes(x = probability, y = high_use, col = prediction))
+
+# define the geom as points and draw the plot
+g + geom_point()
+
+# tabulate the target variable versus the predictions
+table(high_use = alc$high_use, prediction = alc$prediction) %>%
+  prop.table() %>% addmargins () 
+```
+
+In this graph you can more easily evaluate how the predictions correlate with the real probability of the high use of alcohol being significantly related with the chosen variables. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

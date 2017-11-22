@@ -2,10 +2,6 @@
 title: "IODS course project"
 output:
   html_document:
-    df_print: paged
-    toc: yes
-    toc_float: yes 
-  html_document:
     author: "ElsaMarques"
     code_folding: hide
     fig_height: 4
@@ -32,4 +28,5 @@ output:
 ```
 
 ***
+
 
