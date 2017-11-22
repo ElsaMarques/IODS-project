@@ -2,14 +2,18 @@
 title: "IODS course project"
 output:
   html_document:
-    author: ElsaMarques
+    df_print: paged
+    toc: yes
+    toc_float: yes 
+  html_document:
+    author: "ElsaMarques"
     code_folding: hide
-    fig_caption: yes
     fig_height: 4
     fig_width: 6
     highlight: espresso
     number_sections: yes
     toc: yes
+    toc_float: yes 
 ---
 
 ***
@@ -23,5 +27,9 @@ output:
 ```
 
 ***
+ 
+```{r child = "chapter3.Rmd"}
+```
 
+***
 

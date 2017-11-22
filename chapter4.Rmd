@@ -1,0 +1,38 @@
+---
+title: "chapter4"
+author: "Elsa Marques"
+date: "11/22/2017"
+output: html_document
+---
+
+# Clustering and classification
+
+*This chapter will teach you how one can cluster datasets. There is different methos to perform the clustering of the data, but in a very simple point of view you cluster what is similar. For that you can use different parameters, from means to specifically chosen parameters*
+
+## **Work done during the week and learning summary.**
+
+The data to be used in this exercise will be loaded from the library {MASS}. 
+
+```{r}
+# access the MASS package
+library(MASS)
+
+# load the data
+data("Boston")
+```
+
+The Boston data set covers the infomration relative to Boston city crime, , nitrogen oxide concentrations , avergade rooms per dwelling, lower status of the population, pupil-teacher ratio in town, etc.. 
+
+```{r}
+str(Boston)
+dim(Boston)
+```
+
+You can see that the data includes a total of 14 variables and 506 observations. 
+
+
+
+
+
+
+

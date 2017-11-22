@@ -1,19 +1,19 @@
 ---
 output: 
   html_document: 
-    highlight: monochrome
+    df_print: tibble
+    fig_caption: yes
+    highlight: espresso
+    number_sections: yes
     toc: yes
 ---
-**Course Diary**
 
 # Regression and model validation
 
 *During this chapter the amount of information to be memorized is higher and more complex. The datacamp exercise, including the videos included in it touch the surface of what you can do to build graphs to visualize and analyse your data. Note that during this chapter you will definetily need to consult external help cheats (mostly provided during the datacamp and your mooc links)*
 
 
-## **Work done during the week and learning summary.**
-
-1. _**Data wrangling exercise**_ 
+## 1. _**Data wrangling exercise**_ 
 
 Load the data set provided (questionary answers regarding learning approaches and students accomplishments in a statistics course):
  
@@ -42,7 +42,7 @@ learning2014 <- read.csv("learning2014.csv")
 
 Since the full data set can be overwelming to explore, viewing the structure, summary and the first values of the data can be helpful to identify what are your main interests in this questionary answers. 
 
-```{r, echo = FALSE}
+```{r}
 #view the structure and summary of the non filtered "learning2014" data
 str(lrn14)
 summary(lrn14)
@@ -98,10 +98,25 @@ You can verify in the graph how the correlation trend varies between female (red
 
 
 ```{r}
-lm(formula = Points ~ Attitude + stra + surf, data = learning2014)
+#Linear model with three explanatory variables 
+my_model <- lm(formula = Points ~ Attitude + stra + surf, data = learning2014)
+
+#Summary of the linear model 
+summary(my_model)
+
 ```
 
-Analyses of the linear regression tell you that by each attitude point up the sutdents have a chance of getting mote 0.34 point , as for one level up of strategic questions 0.85 and inversevly correlated for the surface points losing -0.59
+Analyses of the linear regression tell you that by each attitude point up the students have a chance of getting mote 0.34 points. This is the more significant relationship with the points obtained (p = 0.001)
+
+
+```{r}
+#Linear model with three explanatory variables 
+my_model <- lm(formula = Points ~ Attitude, data = learning2014)
+
+#Summary of the linear model 
+summary(my_model)
+```
+
 
 _**Graphical model validation**_
 
@@ -114,7 +129,9 @@ _**Residuals vs Fitted plot**_
 _**Normal Q-Q plot**_
 
 ```{r}
-my_fit <- lm(formula = Points ~ Attitude + stra + surf, data = learning2014)
+library(ggfortify)
+autoplot(my_model, which= 2) +
+     theme_bw()
 ```
 
 

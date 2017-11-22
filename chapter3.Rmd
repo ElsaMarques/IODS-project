@@ -1,0 +1,232 @@
+---
+output: 
+  html_document: 
+    fig_height: 3
+    fig_width: 5
+    highlight: espresso
+---
+
+# Logistic regression
+
+*This chapter introduces you the concept of logistic regression. Which in a very simplified matter meand how well your data fits to the idea of a linear correlation between the variables, arguments you are testing.*
+
+# *About this week working data set "Student Performance Data Set*
+
+> "This data approach student achievement in secondary education of two Portuguese schools. The data attributes include student grades, demographic, social and school related features) and it was collected by using school reports and questionnaires. Two datasets are provided regarding the performance in two distinct subjects: Mathematics (mat) and Portuguese language (por). In [Cortez and Silva, 2008], the two datasets were modeled under binary/five-level classification and regression tasks (see [paper](http://www3.dsi.uminho.pt/pcortez/student.pdf) source for more details)."
+
+
+## 1. **Load the combined data set from wrangling exercise from your local folder:**
+```{r, echo = FALSE}
+#Read the data you saved in the wrangling data exercises
+read.csv("student-combined.csv")
+alc <- read.csv("student-combined.csv")
+```
+
+The data wrangling exercise combined the two student alcohol consumption data sets. 
+Variables not used for joining the two data have been combined by averaging (including the grade variables)
+  - 'alc_use' is the average of 'Dalc' and 'Walc'
+  - 'high_use' is TRUE if 'alc_use' is higher than 2 and FALSE otherwise
+
+
+##2. **Analysis of the data** 
+###2.1 *start by viewing the variable names, example of the first rows in the data, summary of the overall data*
+
+```{r, echo = FALSE}
+#Listing the column names
+colnames(alc)
+```
+
+```{r, echo=FALSE}
+head(alc)
+```
+
+
+```{r, echo=FALSE}
+summary(alc)
+```
+
+ - With this overview of the data you can basically just check one by one what are the minimum and maximum values for each variable and also the total number of female and male students in the course.
+ 
+ 
+###2.2 *Another why to inspect the data is to check summaries of the data by groups of variables*
+
+```{r,echo=FALSE}
+# access the tidyverse libraries dplyr and ggplot2
+library(dplyr); library(ggplot2)
+
+# produce summary statistics by group
+alc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_grade = mean(G3))
+```
+
+###2.1 *Analyse the relationship between the levels of high alcohol consuption and failure, absences, sex and grades of the students.* 
+
+```{r,echo=FALSE}
+# find the model with glm()
+m <- glm(high_use ~ failures + absences + sex + G3, data = alc, family = "binomial")
+
+# print out a summary of the model
+summary(m)
+
+# print out the coefficients of the model
+coef(m)
+```
+
+
+The purpose of your analysis is to study the relationships between high/low alcohol consumption and some of the other variables in the data. To do this, choose 4 interesting variables in the data and for each of them, present your personal hypothesis about their relationships with alcohol consumption. (0-1 point)
+
+##3. **Inspect numerically and graphically the distributions of the previously chosen variables and their relationship with alcohol consumption**
+
+```{r,echo=FALSE}
+# initialize a plot of high_use and G3
+g1 <- ggplot(alc, aes(x = high_use, y = G3, fill = sex))
+
+# define the plot as a boxplot and draw it
+g1 + geom_boxplot() + ylab("grade") + ggtitle("Student grades by alcohol consumption and sex")
+
+```
+
+
+
+```{r,echo=FALSE}
+# initialise a plot of high_use and absences
+g2 <- ggplot(alc, aes(x = high_use, y = absences, fill = sex))
+
+# define the plot as a boxplot and draw it
+g2 + geom_boxplot() + ggtitle("Student absences by alcohol consumption and sex")
+```
+
+
+```{r,echo=FALSE}
+# initialise a plot of high_use and absences
+g2 <- ggplot(alc, aes(x = high_use, y = age, fill = sex))
+
+# define the plot as a boxplot and draw it
+g2 + geom_boxplot() + ggtitle("Student age by alcohol consumption and sex")
+```
+
+
+```{r, echo=FALSE}
+# initialise a plot of high_use and absences
+g2 <- ggplot(alc, aes(x = high_use, y = health, fill = sex))
+
+# define the plot as a boxplot and draw it
+g2 + geom_boxplot() + ggtitle("Student failure by alcohol consumption and sex")
+```
+
+Numerically and graphically explore the distributions of your chosen variables and their relationships with alcohol consumption (use for example cross-tabulations, bar plots and box plots). Comment on your findings and compare the results of your exploration to your previously stated hypotheses. (0-5 points)
+
+
+
+##4. ** 
+
+```{r,echo=FALSE}
+# find the model with glm()
+m <- glm(high_use ~ failures + absences + sex, data = alc, family = "binomial")
+
+# print out a summary of the model
+summary(m)
+
+# print out the coefficients of the model
+coef(m)
+
+# compute odds ratios (OR)
+OR <- coef(m) %>% exp
+
+# compute confidence intervals (CI)
+CI <- confint(m) %>% exp
+
+# print out the odds ratios with their confidence intervals
+cbind(OR, CI)
+```
+
+
+Use logistic regression to statistically explore the relationship between your chosen variables and the binary high/low alcohol consumption variable as the target variable. Present and interpret a summary of the fitted model. Present and interpret the coefficients of the model as odds ratios and provide confidence intervals for them. Interpret the results and compare them to your previously stated hypothesis. Hint: If your model includes factor variables see for example the first answer of this stackexchange thread on how R treats and how you should interpret these variables in the model output (or use some other resource to study this). (0-5 points)
+
+##5. **
+
+```{r,echo=FALSE}
+
+```
+
+
+Using the variables which, according to your logistic regression model, had a statistical relationship with high/low alcohol consumption, explore the predictive power of you model. Provide a 2x2 cross tabulation of predictions versus the actual values and optionally display a graphic visualizing both the actual values and the predictions. Compute the total proportion of inaccurately classified individuals (= the training error) and comment on all the results. Compare the performance of the model with performance achieved by some simple guessing strategy. (0-3 points)
+
+##6. 
+
+```{r}
+
+```
+
+Bonus: Perform 10-fold cross-validation on your model. Does your model have better test set performance (smaller prediction error using 10-fold cross-validation) compared to the model introduced in DataCamp (which had about 0.26 error). Could you find such a model? (0-2 points to compensate any loss of points from the above exercises)
+
+##7.
+
+```{r}
+
+```
+
+Super-Bonus: Perform cross-validation to compare the performance of different logistic regression models (= different sets of predictors). Start with a very high number of predictors and explore the changes in the training and testing errors as you move to models with less predictors. Draw a graph displaying the trends of both training and testing errors by the number of predictors in the model. (0-4 points to compensate any loss of points from the above exercises)
+
+
+
+
+
+
+# predict() the probability of high_use
+probabilities <- predict(m, type = "response")
+
+# add the predicted probabilities to 'alc'
+alc <- mutate(alc, probability = probabilities)
+
+# use the probabilities to make a prediction of high_use
+alc <- mutate(alc, prediction = probability > 0.5)
+
+# see the last ten original classes, predicted probabilities, and class predictions
+select(alc, failures, absences, sex, high_use, probability, prediction) %>% head(10)
+
+# tabulate the target variable versus the predictions
+table(high_use = alc$high_use, prediction = alc$probability > 0.5)
+
+
+
+# initialize a plot of 'high_use' versus 'probability' in 'alc'
+g <- ggplot(alc, aes(x = probability, y = high_use, col = prediction))
+
+# define the geom as points and draw the plot
+g + geom_point()
+
+# tabulate the target variable versus the predictions
+table(high_use = alc$high_use, prediction = alc$prediction) %>%
+  prop.table() %>% addmargins () 
+
+
+# the logistic regression model m and dataset alc with predictions are available
+
+# define a loss function (mean prediction error)
+loss_func <- function(class, prob) {
+  n_wrong <- abs(class - prob) > 0.5
+  mean(n_wrong)
+}
+
+# call loss_func to compute the average number of wrong predictions in the (training) data
+loss_func(class = alc$high_use, prob = alc$probability)
+
+
+# the logistic regression model m and dataset alc (with predictions) are available
+
+# define a loss function (average prediction error)
+loss_func <- function(class, prob) {
+  n_wrong <- abs(class - prob) > 0.5
+  mean(n_wrong)
+}
+
+# compute the average number of wrong predictions in the (training) data
+loss_func(class = alc$high_use, prob = alc$probability)
+
+# K-fold cross-validation
+library(boot)
+cv <- cv.glm(data = alc, cost = loss_func, glmfit = m, K = 10)
+
+# average number of wrong predictions in the cross validation
+cv$delta[1]
+
