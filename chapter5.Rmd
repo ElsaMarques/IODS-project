@@ -1,0 +1,16 @@
+---
+title: "chapter5"
+author: "Elsa Marques"
+date: "11/29/2017"
+output: html_document
+---
+
+# Dimensionality reduction techniques
+
+*This chapter will teach you how to reduce a huge amount of variables (data dimensions) to a smaller and more relevant variables in order to make it easier to visualize and compare different data populations. The key method to reduce the multidimensional data is the principal component analysis (PCA). The multiple correspondence analysis (MCA) and other correspondece analysis (CA) are also covered in this chapter.*
+
+#*About this week working data set "Human"*
+
+  > The 'human' dataset originates from the United Nations Development Programme. See their [data page](http://hdr.undp.org/en/content/human-development-index-hdi) for more information. For a nice overview see also the calculating the human development indices [pdf](http://hdr.undp.org/sites/default/files/hdr2015_technical_notes.pdf).
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+

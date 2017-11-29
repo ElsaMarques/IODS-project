@@ -10,7 +10,7 @@ output:
 
 *This chapter introduces you the concept of logistic regression. Which in a very simplified matter meand how well your data fits to the idea of a linear correlation between the variables, arguments you are testing.*
 
-# *About this week working data set "Student Performance Data Set*
+## *About this week working data set "Student Performance Data Set*
 
 > "This data approach student achievement in secondary education of two Portuguese schools. The data attributes include student grades, demographic, social and school related features) and it was collected by using school reports and questionnaires. Two datasets are provided regarding the performance in two distinct subjects: Mathematics (mat) and Portuguese language (por). In [Cortez and Silva, 2008], the two datasets were modeled under binary/five-level classification and regression tasks (see [paper](http://www3.dsi.uminho.pt/pcortez/student.pdf) source for more details)."
 
