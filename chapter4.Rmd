@@ -1,5 +1,5 @@
 ---
-title: "chapter4"
+title: "Chapter4"
 author: "Elsa Marques"
 date: "11/22/2017"
 output: html_document
@@ -12,7 +12,7 @@ output: html_document
 ## *About this week working data set "Boston"* 
   > The data set Boston is included in the library {MASS} and refers to the "Housing Values in Suburbs of Boston". The data compiled in the dataset orginates from the following papers: [Harrison and Rubinfeld (1978)](https://www.law.berkeley.edu/files/Hedonic.PDF) & [Belsley et al 1980](http://onlinelibrary.wiley.com/book/10.1002/0471725153)
  
-## 1. **The data to be used in this exercise will be loaded from the library {MASS}.** 
+## **The data to be used in this exercise will be loaded from the library {MASS}.** 
 
 ```{r, echo=FALSE}
 # access the MASS package and other library that will be used in this exercise latter on
@@ -30,7 +30,6 @@ The Boston data set includes the Housing Values in Suburbs of Boston (from 1978 
 ```{r, echo=FALSE}
 #explore the data set  
 str(Boston)
-
 dim(Boston)
 ```
 
@@ -50,7 +49,7 @@ You can see that the data includes a total of 506 observations distributed into 
   - lstat = lower status of the population (percent).
   - medv = median value of owner-occupied homes in \$1000s.
 
-## 2. **Lets have a graphical overview of the data** 
+## **Lets have a graphical overview of the data** 
 
 ```{r, echo=FALSE}
 library(ggplot2) 
@@ -60,7 +59,7 @@ ggpairs(Boston, title = "Housing Values in Suburbs of Boston", upper = "blank", 
  - From the graphical overview using the ggpairs between the variables you can start by observing which of the variables are normally distributed and which of them presented skewed data. In this data set most of the variables presented themselves skewed in either direction, being the rm (average number of rooms per dwelling) the only variable that presents a normal distribution. 
 
 
-## 2.1 **For a better understanding of the data lets also have a look on the summaries of the variables included in this dataset.** 
+### **For a better understanding of the data lets also have a look on the summaries of the variables included in this dataset.** 
 ```{r, echo=FALSE}
 library(dplyr)
 summary(Boston)
@@ -68,7 +67,7 @@ summary(Boston)
 
  - From the variables summary you can mainly check the ranges of the data in the different variables. The skweded distrubition of most variables is now noticeable when you compare the Mean values and the minimum and maximum values of the data. 
  
-## 2.2 **For a better understanding on how the variables relate to each other, lets visualize a correlation plot.** 
+### **For a better understanding on how the variables relate to each other, lets visualize a correlation plot.** 
 ```{r, echo=FALSE}
 library(corrplot) 
 
@@ -90,7 +89,7 @@ corrplot(cor_matrix, method="square", type="upper", order = "hclust", tl.col="bl
   - On the other side, you can also observe some High negative numbers (Red) meaning that while the value of one variable increases the other one will decrease. For example, you can see how lstat (percentage of the lower status of the population) inversely correlates with medv (median value of owner-occupied homes in \$1000s) and rm (average number of rooms per dwelling). Meaning that the higher amount of low status population the less amount of rooms per dwelling, and the less amount of owner occupied homes with the value of $1000.
 
  
-## 3. **Standardizing the dataset and explore the scaled data summary and how variables change.**
+## **Standardizing the dataset and explore the scaled data summary and how variables change.**
 ```{r, echo=FALSE}
 # center and standardize variables
 boston_scaled <- scale(Boston)
@@ -108,7 +107,7 @@ boston_scaled <- as.data.frame(boston_scaled)
   - When scaling the data, you just change the scale from which the data distributes in the x axis, not changing the values of the data itself. One can think this process is like grabbing the axis at the two ends and stretching or compressing it in order to make all your variables vary in the same comparable range, making it easier to compare. The scaling takes in account the mean (average) and standard deviation of the data. 
 
 
-## 3.1 **Create a categorical variable of the crime rate in the Boston dataset (from the scaled crime rate). Quantiles from the old "crim"" variable will be used as the break points for the new "crime"" categorical variable.**
+### **Create a categorical variable of the crime rate in the Boston dataset (from the scaled crime rate). Quantiles from the old "crim"" variable will be used as the break points for the new "crime"" categorical variable.**
 ```{r, echo = FALSE}
 # summary of the scaled crime rate
 summary(boston_scaled$crim)
@@ -126,7 +125,7 @@ table(crime)
 
  - The new crime variable is now easier to interpret the amount of data fiiting in the the new assigned labels: "low", "med_low", "med_high", "high". You can also verify how the distribution between this categories is quite even.    
  
-## 3.2 **Since the new crime category looks more informative, let's drop the old crim variable from the dataset.** 
+### **Since the new crime category looks more informative, let's drop the old crim variable from the dataset.** 
 ```{r, echo=FALSE}
 # remove original crim from the dataset
 boston_scaled <- dplyr::select(boston_scaled, -crim)
@@ -141,7 +140,7 @@ boston_scaled %>% group_by(crime)
 
   - Now you can easily explore how the other variables vary according to the high or low crime rate category, and to have a better understanding on that I group the variables by crime categories. 
 
-## 3.3 **Divide the dataset to train and test sets, so that 80% of the data belongs to the train set.**
+### **Divide the dataset to train and test sets, so that 80% of the data belongs to the train set.**
 ```{r, echo=FALSE}
 # number of rows in the Boston dataset 
 n <- nrow(boston_scaled)
@@ -160,7 +159,7 @@ test
 ```
 
 
-## 4. **Fit the linear discriminant analysis on the train set. Use the categorical crime rate ("crime") as the target variable and all the other variables in the dataset as predictor variables. Draw the LDA (bi)plot.**
+## **Fit the linear discriminant analysis on the train set. Use the categorical crime rate ("crime") as the target variable and all the other variables in the dataset as predictor variables. Draw the LDA (bi)plot.**
 ```{r, echo=FALSE}
 library(dplyr)
 # linear discriminant analysis
@@ -184,13 +183,13 @@ classes <- as.numeric(train$crime)
 
 # plot the lda results
 plot(lda.fit, dimen = 2, col = classes, pch = classes)
-lda.arrows(lda.fit, myscale = 5)
+lda.arrows(lda.fit, myscale = 1)
 ```
 
-- According to the linear description fit you can see how most of the high crime category correlates with the ptratio (pupil-teacher ratio by town).
+- According to the linear description fit you can see how most of the high crime category correlates with the rad (index of accessibility to radial highways).
 
 
-## 5.**Save the crime categories from the test set and then remove the categorical crime variable from the test dataset. Then predict the classes with the LDA model on the test data. Cross tabulate the results with the crime categories from the test set.**
+## **Save the crime categories from the test set and then remove the categorical crime variable from the test dataset. Then predict the classes with the LDA model on the test data. Cross tabulate the results with the crime categories from the test set.**
 
 ```{r, echo = FALSE}
 library(dplyr)
@@ -210,7 +209,7 @@ table(correct = correct_classes, predicted = lda.pred$class)
 
   - You can see how the predicted and corrected data tend to agree on the most extreme values ("low" and "high"), in the "med-low" and "med-high" you can see the most discrepance between the correct data and the predicted one. 
 
-## 6.**Reload the Boston dataset and standardize the dataset (we did not do this in the Datacamp exercises, but you should scale the variables to get comparable distances). Calculate the distances between the observations.** 
+## **Reload the Boston dataset and standardize the dataset (we did not do this in the Datacamp exercises, but you should scale the variables to get comparable distances). Calculate the distances between the observations.** 
 
 ```{r, echo=FALSE}
 # load MASS and Boston
@@ -235,7 +234,7 @@ summary(dist_man)
 
   - You can see how the two methods to calculate the distances between the variables , gives you as result different numbers, but you can also note how the trend between the variations is maintained. 
   
-## 6.1 **Run k-means algorithm on the dataset. Investigate what is the optimal number of clusters and run the algorithm again. Visualize the clusters (for example with the pairs() or ggpairs() functions, where the clusters are separated with colors):**
+### **Run k-means algorithm on the dataset. Investigate what is the optimal number of clusters and run the algorithm again. Visualize the clusters (for example with the pairs() or ggpairs() functions, where the clusters are separated with colors):**
 
 ```{r, echo=FALSE}
 # MASS, ggplot2 and Boston dataset are available
@@ -261,8 +260,8 @@ pairs(boston_scaled, col = km$cluster)
  
  - When exploring the pairs using the colors to separate the km clusters, you can see that the variable that better separetes the two clusters (Red Vs Black cluster) would be tax (full-value property-tax rate per \$10,000) and rad (index of accessibility to radial highways). An almost complete cluster separation can also be observed when you check the crim (per capita crime rate by town) and black (1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town) variables. 
  
-## 7. **Optional / Bonus sections:**  
-### 7.1 **Perform k-means on the original Boston data with some reasonable number of clusters (> 2). Remember to standardize the dataset.**  
+## **Optional / Bonus sections:**  
+###  **Perform k-means on the original Boston data with some reasonable number of clusters (> 2). Remember to standardize the dataset.**  
 
 ```{r, echo = FALSE}
 
@@ -283,7 +282,7 @@ pairs(boston_scaled, col = km$cluster)
  
  - Now when you check at the pairs with the clusters divided by colors, since we have more clusters it gets a bit more confusing to read the data. Nonetheless, after careful observation you the variables were you can more easily identify the different clusters (Red, Black and Green) are medv (median value of owner-occupied homes in \$1000s) and partialy successful will be age (proportion of owner-occupied units built prior to 1940).  
  
-### 7.2 **Then perform LDA using the clusters as target classes. Include all the variables in the Boston data in the LDA model. Visualize the results with a biplot (include arrows representing the relationships of the original variables to the LDA solution).**
+### **Then perform LDA using the clusters as target classes. Include all the variables in the Boston data in the LDA model. Visualize the results with a biplot (include arrows representing the relationships of the original variables to the LDA solution).**
 
 I was trying the following approach but I guess I missed something, further work/learning required in this section ; if the peer review knows how to fix this and explain me what is wrong I highly appreciate it!! 
 
@@ -316,7 +315,7 @@ lda.arrows(lda.fit, myscale = 5)
 - I got stuck in this section as unfortunetely I couldn't manage to fix the errors in my code
 
  
-## 8. **Super-Bonus: Run the provided code for the (scaled) train data that you used to fit the LDA. The code creates a matrix product, which is a projection of the data points.**
+## **Super-Bonus: Run the provided code for the (scaled) train data that you used to fit the LDA. The code creates a matrix product, which is a projection of the data points.**
 ```{r, echo=FALSE}
 model_predictors <- dplyr::select(train, -crime)
 
@@ -336,7 +335,7 @@ plot_ly(x = matrix_product$LD1, y = matrix_product$LD2, z = matrix_product$LD3, 
 ```
 
 
-### 8.1 **Draw another 3D plot where the color is defined by the clusters of the k-means. How do the plots differ?**
+### **Draw another 3D plot where the color is defined by the clusters of the k-means. How do the plots differ?**
 
 ```{r, echo=FALSE}
 

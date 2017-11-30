@@ -52,3 +52,47 @@ write.csv(human, file = "human.csv")
 
 #Test if you can read back the saved new joined combined dataset
 read.csv("human.csv")
+
+
+
+
+#RStudio exercise 5 from here onwards (NOT READY FOR PEER REVIEW YET)
+#Transform the Gross National Income (GNI) variable to numeric 
+library(tidyr)
+library(stringr)
+str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
+
+#Exclude unneeded variables:
+keep <- c("Country", "Edu2.FM", "Labo.FM", "Edu.Exp", "Life.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F")
+human <- select(human, one_of(keep))
+
+#Remove all rows with missing values
+#Print out a completeness indicator of the 'human' data
+complete.cases(human)
+
+#Print out the data along with a completeness indicator as the last column
+data.frame(human[-1], comp = complete.cases(human))
+
+#Filter out all rows with NA values
+human_ <- na.omit(human)
+
+#Remove the observations which relate to regions instead of countries. 
+# look at the last 10 observations of human
+tail(human, n = 10)
+
+# define the last indice we want to keep
+last <- nrow(human) - 7
+
+# choose everything until the last 7 observations
+human_ <- human[1:155, ]
+
+#Define the row names of the data by the country names and 
+#remove the country name column from the data. 
+#Add countries as rownames
+rownames(human_) <- human_$Country
+human_ <- select(human, -Country)
+
+The data should now have 155 observations and 8 variables. 
+Save the human data in your data folder including the row names. 
+You can overwrite your old ‘human’ data.
+

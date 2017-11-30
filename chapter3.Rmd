@@ -10,12 +10,12 @@ output:
 
 *This chapter introduces you the concept of logistic regression. Which in a very simplified matter meand how well your data fits to the idea of a linear correlation between the variables, arguments you are testing.*
 
-## *About this week working data set "Student Performance Data Set*
+## *About this week working data set "Student Performance Data Set".*
 
 > "This data approach student achievement in secondary education of two Portuguese schools. The data attributes include student grades, demographic, social and school related features) and it was collected by using school reports and questionnaires. Two datasets are provided regarding the performance in two distinct subjects: Mathematics (mat) and Portuguese language (por). In [Cortez and Silva, 2008], the two datasets were modeled under binary/five-level classification and regression tasks (see [paper](http://www3.dsi.uminho.pt/pcortez/student.pdf) source for more details)."
 
 
-## 1. **Load the combined data set from wrangling exercise from your local folder:**
+## **Load the combined data set from wrangling exercise from your local folder:**
 ```{r, echo = FALSE}
 #Read the data you saved in the wrangling data exercises
 read.csv("student-combined.csv")
@@ -28,8 +28,8 @@ Variables not used for joining the two data have been combined by averaging (inc
   - 'high_use' is TRUE if 'alc_use' is higher than 2 and FALSE otherwise
 
 
-##2. **Analysis of the data** 
-###2.1 *start by viewing the variable names, example of the first rows in the data, summary of the overall data*
+## **Analysis of the data** 
+### *start by viewing the variable names, example of the first rows in the data, summary of the overall data*
 
 ```{r, echo = FALSE}
 #Listing the column names
@@ -48,7 +48,7 @@ summary(alc)
  - With this overview of the data you can basically just check one by one what are the minimum and maximum values for each variable and also the total number of female and male students in the course.
  
  
-###2.2 *Another why to inspect the data is to check summaries of the data by groups of variables*
+### *Another why to inspect the data is to check summaries of the data by groups of variables*
 
 ```{r,echo=FALSE}
 # access the tidyverse libraries dplyr and ggplot2
@@ -58,7 +58,7 @@ library(dplyr); library(ggplot2)
 alc %>% group_by(sex, high_use) %>% summarise(count = n(), mean_grade = mean(G3))
 ```
 
-###2.1 *Analyse the relationship between the levels of high alcohol consuption and failure, absences, sex and grades of the students.* 
+### *Analyse the relationship between the levels of high alcohol consuption and failure, absences, sex and grades of the students.* 
 
 One could associate that an increased alcohol consuption will lead to an increase in failures, absences from school and also with a decrease in the final grades (grade form the 3rd period = G3). The differences of alcohol intake amongs sex and age seems also interesting to explore (once there is the stereotyped idea that males drink more and younger students are not leagally allowed to drink). 
 
@@ -82,7 +82,7 @@ G3
 
 
 
-##3. **Inspect numerically and graphically the distributions of the previously chosen variables and their relationship with alcohol consumption**
+## **Inspect numerically and graphically the distributions of the previously chosen variables and their relationship with alcohol consumption**
 
 ```{r,echo=FALSE}
 # initialize a plot of high_use and G3
@@ -128,7 +128,7 @@ You can see that while the heavy alcohol consumption in the females is distribut
 
 
 
-##4. *Use logistic regression to statistically explore the relationship between chosen variables and the binary high/low alcohol consumption variable as the target variable.*
+## *Use logistic regression to statistically explore the relationship between chosen variables and the binary high/low alcohol consumption variable as the target variable.*
 
 ```{r,echo=FALSE}
 # find the model with glm()
@@ -141,7 +141,7 @@ summary(m)
 coef(m)
 ```
 
-###4.1 *Present and interpret the coefficients of the model as odds ratios and provide confidence intervals for them.*
+### *Present and interpret the coefficients of the model as odds ratios and provide confidence intervals for them.*
 
 ```{r, echo=FALSE}
 # compute odds ratios (OR)
@@ -157,7 +157,7 @@ cbind(OR, CI)
 
 
 
-##5. *Compute the total proportion of inaccurately classified individuals (= the training error) and comment on all the results.*
+## *Compute the total proportion of inaccurately classified individuals (= the training error) and comment on all the results.*
 
 ```{r,echo=FALSE}
 
@@ -179,7 +179,7 @@ table(high_use = alc$high_use, prediction = alc$probability > 0.5)
 
 You can check in the tables in how many student cases the prediction wouldn't have assumed a correlation for high use of alcohol and the selected variables. In the 2 x 2 summary table you can see that in 84 cases the prediction claimed no relation but in the real cases you could detect a relationship between the variables. 30 cases there was in both prediction and data analysis a relation between high use of alcohol and the chosen variables.  
 
-##6. *Perform 10-fold cross-validation on your model*
+## *Perform 10-fold cross-validation on your model*
 
 ```{r, echo=FALSE}
 
@@ -202,7 +202,7 @@ cv$delta[1]
 
 Performing an higher number of cross validation you can decrease the number of errors in our predictions. 
 
-##7. *Draw a graph displaying the trends of both training and testing errors by the number of predictors in the model.*
+## *Draw a graph displaying the trends of both training and testing errors by the number of predictors in the model.*
 
 ```{r, echo=FALSE}
 # initialize a plot of 'high_use' versus 'probability' in 'alc'
