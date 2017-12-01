@@ -54,12 +54,13 @@ write.csv(human, file = "human.csv")
 read.csv("human.csv")
 
 
-
-
 #RStudio exercise 5 from here onwards (NOT READY FOR PEER REVIEW YET)
+
 #Transform the Gross National Income (GNI) variable to numeric 
-library(tidyr)
+library(tidyverse)
+library(dplyr)
 library(stringr)
+human %>% mutate_each("GNI"(as.numeric))
 str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
 
 #Exclude unneeded variables:
@@ -95,7 +96,7 @@ human_ <- select(human_, -Country)
 #The data should now have 155 observations and 8 variables. 
 
 #Save the human data in your data folder including the row names. 
-write.csv(human_, file = "human_.csv", row.names = TRUE)
+write.csv(human_, file = "human_.csv", row.names = TRUE, col.names = TRUE)
 
 #Check if you can read it back 
-read.csv("human_.csv)
+read.csv("human_.csv")

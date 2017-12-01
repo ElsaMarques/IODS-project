@@ -18,8 +18,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 ```{r, echo=FALSE}
 #Load the data set used in the data wrangling section(from your local drive)
-setwd('/Users/marques/Documents/GitHub/IODS-project/data')
-read_csv("human_.csv")
+read.csv("human_.csv")
 ```
 
 
@@ -31,8 +30,18 @@ str(human_)
 dim(human_)
 ```
 
-
- - The brief overview on this data shows that the data "human_" created during the data wrangling exercise comprises 155 observations spread into 8 variables. Those include the amount of Female and Male that have an Higher Education; also the Female and Male amount of people that are include din laboral life; 
+ - The brief overview on this data shows that the data "human_" created during the data wrangling exercise comprises 155 observations spread into 8 variables. 
+ - These observations are selected from a bigger data set of observations included to calculate the human development index (HDI).
+ - Selected factors are:
+    - Edu2.FM  = % of secondary school age population (Female and Male); 
+    - Labo.FM  = The amount of people (Female and Male) that are active in laboral life; 
+    - Edu.Exp = Education experiences;
+    - GNI = Gross national income per capita; 
+    - Life.Exp = life expectancy upon birth;
+    - Mat.Mor = maternal mortality rate (deaths
+per100,000 live births);
+    - Ado.Birth = adolescent birth rate 
+    - Parli.F = % of seats taken by female in the parliament
  
  describe the dataset briefly, assuming the reader has no previous knowledge of it (this is now close to the reality, since you have named the variables yourself). (0-1 point)
 
