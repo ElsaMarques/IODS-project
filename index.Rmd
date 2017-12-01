@@ -1,5 +1,5 @@
 ---
-title: "IODS course project"
+title: "IODS course diary"
 output:
   html_document:
     author: "ElsaMarques"
@@ -33,3 +33,6 @@ output:
 ```
 
 ***
+ 
+```{r child = "chapter5.Rmd"}
+```

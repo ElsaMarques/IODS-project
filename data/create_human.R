@@ -90,9 +90,12 @@ human_ <- human[1:155, ]
 #remove the country name column from the data. 
 #Add countries as rownames
 rownames(human_) <- human_$Country
-human_ <- select(human, -Country)
+human_ <- select(human_, -Country)
 
-The data should now have 155 observations and 8 variables. 
-Save the human data in your data folder including the row names. 
-You can overwrite your old ‘human’ data.
+#The data should now have 155 observations and 8 variables. 
 
+#Save the human data in your data folder including the row names. 
+write.csv(human_, file = "human_.csv", row.names = TRUE)
+
+#Check if you can read it back 
+read.csv("human_.csv)

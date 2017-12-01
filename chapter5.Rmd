@@ -18,7 +18,8 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 ```{r, echo=FALSE}
 #Load the data set used in the data wrangling section(from your local drive)
-data("human")
+setwd('/Users/marques/Documents/GitHub/IODS-project/data')
+read_csv("human_.csv")
 ```
 
 
@@ -26,12 +27,14 @@ data("human")
 
 ```{r, echo=FALSE}
 library(dplyr)
-str(human)
-dim(human)
+str(human_)
+dim(human_)
 ```
 
 
- - describe the dataset briefly, assuming the reader has no previous knowledge of it (this is now close to the reality, since you have named the variables yourself). (0-1 point)
+ - The brief overview on this data shows that the data "human_" created during the data wrangling exercise comprises 155 observations spread into 8 variables. Those include the amount of Female and Male that have an Higher Education; also the Female and Male amount of people that are include din laboral life; 
+ 
+ describe the dataset briefly, assuming the reader has no previous knowledge of it (this is now close to the reality, since you have named the variables yourself). (0-1 point)
 
 ## 2. **Show a graphical overview of the data and show summaries of the variables in the data.** 
 
