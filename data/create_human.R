@@ -60,8 +60,13 @@ read.csv("human.csv")
 library(tidyverse)
 library(dplyr)
 library(stringr)
-human %>% mutate_each("GNI"(as.numeric))
+
+#Check the structure of "GNI"
+str(human$GNI)
+
+#Remove the comas in the GNI data and use the pipe to save it as numeric
 str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
+
 
 #Exclude unneeded variables:
 keep <- c("Country", "Edu2.FM", "Labo.FM", "Edu.Exp", "Life.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F")
@@ -93,7 +98,7 @@ human_ <- human[1:155, ]
 rownames(human_) <- human_$Country
 human_ <- select(human_, -Country)
 
-#The data should now have 155 observations and 8 variables. 
+#The dataset "human_" has 155 observations of 8 variables. 
 
 #Save the human data in your data folder including the row names. 
 write.csv(human_, file = "human_.csv", row.names = TRUE, col.names = TRUE)
