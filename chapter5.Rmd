@@ -14,12 +14,13 @@ output: html_document
   > The 'human' dataset originates from the United Nations Development Programme. See their [data page](http://hdr.undp.org/en/content/human-development-index-hdi) for more information. For a nice overview see also the calculating the human development indices [pdf](http://hdr.undp.org/sites/default/files/hdr2015_technical_notes.pdf).
 This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-## **Load the ‘human’ data into R.**
+## **Load the "human_" data into R.**
 
 ```{r, echo=FALSE}
 library(dplyr)
-#Load the data set used in the data wrangling section(from your local drive)
-read.csv("human_.csv")
+#Load the data set used in the data wrangling section (from your local drive)
+human_ <- read.table("human_.csv", row.names = 1 , header = TRUE, sep = ",")
+head(human_, n = 10)
 ```
 
 
@@ -50,7 +51,6 @@ dim(human_)
 ```{r, echo=FALSE}
 library(GGally)
 #Visual obervation of the "human_" variables
-ggpairs(human_)
 
 # Summarize the "human_" variables
 summary(human_)
@@ -62,7 +62,7 @@ summary(human_)
 ```{r, echo=FALSE}
 library(corrplot)
 # calculate the correlation matrix and round it
-cor_matrix<-cor(human_) %>% round(digits = 2)
+cor_matrix <-cor(human_) %>% round(digits = 2)
 
 # print the correlation matrix
 cor_matrix

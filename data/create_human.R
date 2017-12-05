@@ -67,7 +67,6 @@ str(human$GNI)
 #Remove the comas in the GNI data and use the pipe to save it as numeric
 str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
 
-
 #Exclude unneeded variables:
 keep <- c("Country", "Edu2.FM", "Labo.FM", "Edu.Exp", "Life.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F")
 human <- select(human, one_of(keep))
@@ -92,13 +91,16 @@ last <- nrow(human) - 7
 # choose everything until the last 7 observations
 human_ <- human[1:155, ]
 
-#Define the row names of the data by the country names and 
+#Define the row names of the data by the country names
+row.names(human_) <- human_$Country
+
 #remove the country name column from the data. 
-#Add countries as rownames
-rownames(human_) <- human_$Country
 human_ <- select(human_, -Country)
 
-#The dataset "human_" has 155 observations of 8 variables. 
+#View the new data frame "human_"
+View(human_)
+
+#The dataset "human_" has now 155 observations of 8 variables. 
 
 #Save the human data in your data folder including the row names. 
 write.csv(human_, file = "human_.csv", row.names = TRUE, col.names = TRUE)
