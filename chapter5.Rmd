@@ -17,6 +17,7 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 ## **Load the ‘human’ data into R.**
 
 ```{r, echo=FALSE}
+library(dplyr)
 #Load the data set used in the data wrangling section(from your local drive)
 read.csv("human_.csv")
 ```
@@ -55,6 +56,9 @@ ggpairs(human_)
 summary(human_)
 ```
 
+ - 
+ 
+ 
 ```{r, echo=FALSE}
 library(corrplot)
 # calculate the correlation matrix and round it
@@ -101,7 +105,7 @@ biplot(pca_human, choices = 1:2, cex = c(0.2,1), col = c("grey40", "deepblue"))
 
 (0-2 points)
 
-## 4. **Standardize the variables in the human data and repeat the above analysis.** 
+## **Standardize the variables in the human data and repeat the above analysis.** 
 ```{r, echo = FALSE}
 # standardize the variables
 human_std <- scale(human_)
@@ -122,12 +126,12 @@ Include captions in you plots where you describe the results by using not just y
 
 (0-4 points)
 
-## 5. **Personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data.** 
+## **Personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data.** 
 
 
 (0-2 points)
 
-## 6. **Load the tea dataset from the package Factominer.**
+## **Load the tea dataset from the package Factominer.**
 
 ```{r}
 # Load the tea dataset and packages FactoMineR
@@ -136,43 +140,96 @@ data("tea")
 ```
 
 
-### 6.1 **Explore the data briefly: look at the structure and the dimensions of the data and visualize it.** 
+### **Explore the data briefly: look at the structure and the dimensions of the data and visualize it.** 
 
 ```{r, echo = FALSE}
 # structure and dimensions of the data
 str(tea)
 dim(tea)
 ```
- - The data is formed of a total of 36variables with 300 observations. 
- - The data set seems to contain data about when the enquired people drink tea, where they drink tea, how they drink the tea (either the format of the tea they use ("how"), or with some addictives ("How")), whats the price range and the kind of the tea they drink, age and sex of the enquired people.
+ - The data is formed by a total of 36 variables with 300 observations. 
+ 
+ - Tea data contains information about when the enquired people drink tea, where they drink tea, how they drink the tea (either the format of the tea they use ("how"), or with some addictives ("How")), what's the price range of the consumed tea, the kind and purpose of the tea they drink, age and sex of the enquired people.
 
-
+#### To better explode Tea data, I decided to start by focusing on the type of Tea (purpose of the Tea in this case) the enquired people consume. 
 ```{r, echo=FALSE}
+#Let's start to focus on the type of tea enquires answered to consume
+keep_columns <- c("escape.exoticism", "spirituality", "healthy", "diuretic", "friendliness", "iron.absorption", "feminine", "sophisticated", "slimming", "exciting", "relaxing", "effect.on.health")
 
-#Let's focus on the type of tea , 
+# select the 'keep_columns' to create a new dataset
+tea_type <- select(tea, one_of(keep_columns))
+
+# look at the summaries and structure of the data
+summary(tea_type)
+str(tea_type)
+
 # visualize the dataset
-gather(tea) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8)) 
+gather(tea_type) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8)) 
 ```
 
-### 6.2 **Then do Multiple Correspondence Analysis on the tea data (or to a certain columns of the data, it’s up to you).** 
+
+
+#### Since previous approach didn't unreavel nothing that interesting, I decided to re- focus on the how, when and where people consume Tea together with gender differences of the enquired people. 
+```{r, echo = FALSE}
+#Lets check another set of variables included in the tea data set
+keep_columns <- c("Tea", "How", "how", "sugar", "where", "lunch", "price", "sex")
+
+# select the 'keep_columns' to create a new dataset
+tea_time <- dplyr::select(tea, one_of(keep_columns))
+
+# look at the summaries and structure of the data
+summary(tea_time)
+str(tea_time)
+
+# visualize the dataset
+gather(tea_time) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 6)) 
+```
+
+- Starting form the most dramatic differences towards the milder ones:
+  - Majority of the enquired people don't drink tea at lunch time; 
+  - Majority of the enquired people drink Tea alone, not mixing lemon, milk or any other additive. 
+  - Earl grey is the most consumed tea amongst the enquired people, followed with what seems significantly less amount of people consuming black and green tea. 
+  - Similar ratios can be observed from where the tea is bought. Majority buys it on chain stores, with seemingly less amount of people buying at a chain store + tea shop and even less at dedicated tea shops. 
+  - Most people consume tea that is provided in tea bags and less dramatic differences are noted to the ones that consume tea bags + unpackaged or just unpackaged. 
+  - There is really not really much differences in the prices of the consumed teas, being the majority of the consumed tea of a variable price or branded price.
+  - From the enquired people, it seems it's almost 50/50 for the consuption of tea with or without  sugar 
+  - It seems there was only slighly more females answering to the tea questionaire. 
+
+
+### **Then do Multiple Correspondence Analysis on the tea data (or to a certain columns of the data, it’s up to you).** 
 
 ```{r}
 # multiple correspondence analysis
-mca <- MCA(tea, graph = FALSE)
+mca <- MCA(tea_time, graph = FALSE)
 
 # summary of the model
 summary(mca)
 ```
 
+- After performing the multiple correspondence analysis (MCA) we identified three dimensions that can be used to categorize the Tea data subset tea_time. The categorical variables table shows you 
 
-Interpret the results of the MCA and 
 
-### 6.3 **draw at least the variable biplot of the analysis. You can also explore other plotting options for MCA.** 
+### **Drawing of the variable biplot of the previous analysis.**
 
 ```{r, echo=FALSE}
 # visualize MCA
+mca <- MCA(tea_time, graph = FALSE)
 plot(mca, invisible=c("none"), habillage = "quali")
 ```
 
 
-Comment on the output of the plots. (0-4 points)
+ - The typical MCA bipolot shows the original classes of the discrete variables on the same "map". This allows us to check the data distributions of the different variables, revealing the connections (correspondences) between different things that would be quite impossible to see from the corresponding cross table. The plot including all the data seems extremelly busy and difficult to verify the correlations between the variables 
+
+- The axis legends inlcude the name of the dimensions and their respective & of variance (calculated and show in the previous table)
+
+### **Exploring other plotting options for better visualization of the variables relationships.** 
+
+```{r, echo = FALSE}
+#Exclude from the plot the data that already in the previous analysis seemingly didn't had much variation
+plot(mca, invisible=c("ind"), habillage = "quali")
+```
+ 
+ - Now upong removal of the individuals in the plot you can better verify how the variables better relate with one or the other dimension. 
+ - In this case you can check how the sugar / no sugar variables equally related to both dimensions , while the Tea (green / black / earl grey) & how (tea bag / tea bag + unpackaged / unpackaged) seem to better relate with the dmension 2.
+
+

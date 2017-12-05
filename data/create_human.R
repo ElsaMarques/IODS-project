@@ -2,7 +2,7 @@
 #Dimmensionality reduction techniques
 
 #Set the working directory for my GitHub folder 
-setwd("~/Documents/GitHub/IODS-project/data")
+setwd("~/Documents/GitHub/IODS-project")
 
 #Load human development data 
 hd <- read.csv("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human_development.csv", stringsAsFactors = F)
