@@ -51,6 +51,7 @@ dim(human_)
 ```{r, echo=FALSE}
 library(GGally)
 #Visual obervation of the "human_" variables
+ggpairs(human_)
 
 # Summarize the "human_" variables
 summary(human_)
@@ -68,10 +69,12 @@ cor_matrix <-cor(human_) %>% round(digits = 2)
 cor_matrix
 
 #visualize it with corrplot
-human_ %>% corrplot()
+corrplot(cor_matrix, method = "color", tl.col = "red", tl.srt = 45)
+
 ```
 
-- Describe and interpret the outputs, commenting on the distributions of the variables and the relationships between them. (0-2 points)
+- Calculating the correlation matrix one can notice that most of the variables are not correlated in any way, and the ones that are show are positevely correlated. This is the case of GNI and Edu.Exp (correlation coefficient of 0.55), GNI and Life.Exp (0.57), Life.Edu and Edu.Exp (0.71)
+
 
 ## **Perform principal component analysis (PCA) on the not standardized human data.**
 ```{r, echo = FALSE}

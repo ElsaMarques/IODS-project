@@ -54,22 +54,29 @@ write.csv(human, file = "human.csv")
 read.csv("human.csv")
 
 
-#RStudio exercise 5 from here onwards (NOT READY FOR PEER REVIEW YET)
+
+
+#RStudio exercise 5 from here onwards
 
 #Transform the Gross National Income (GNI) variable to numeric 
 library(tidyverse)
 library(dplyr)
 library(stringr)
 
+#Check that human data is properly loaded from previous wrangling
+read.csv("human.csv")
+
 #Check the structure of "GNI"
 str(human$GNI)
 
 #Remove the comas in the GNI data and use the pipe to save it as numeric
-str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric
+human$GNI <- str_replace(human$GNI, pattern=",", replace ="") %>% as.numeric()
+human$GNI    
 
 #Exclude unneeded variables:
 keep <- c("Country", "Edu2.FM", "Labo.FM", "Edu.Exp", "Life.Exp", "GNI", "Mat.Mor", "Ado.Birth", "Parli.F")
 human <- select(human, one_of(keep))
+human
 
 #Remove all rows with missing values
 #Print out a completeness indicator of the 'human' data
@@ -79,22 +86,23 @@ complete.cases(human)
 data.frame(human[-1], comp = complete.cases(human))
 
 #Filter out all rows with NA values
-human_ <- na.omit(human)
+human_ <- filter(human, complete.cases(human))
+human_
 
 #Remove the observations which relate to regions instead of countries. 
 # look at the last 10 observations of human
-tail(human, n = 10)
+tail(human_, n = 10)
 
 # define the last indice we want to keep
-last <- nrow(human) - 7
+last <- nrow(human_) - 7
 
 # choose everything until the last 7 observations
-human_ <- human[1:155, ]
+human_ <- human[1:last, ]
 
 #Define the row names of the data by the country names
 row.names(human_) <- human_$Country
 
-#remove the country name column from the data. 
+#Remove the country name column from the data. 
 human_ <- select(human_, -Country)
 
 #View the new data frame "human_"
@@ -103,7 +111,7 @@ View(human_)
 #The dataset "human_" has now 155 observations of 8 variables. 
 
 #Save the human data in your data folder including the row names. 
-write.csv(human_, file = "human_.csv", row.names = TRUE, col.names = TRUE)
+write.csv(human_, file = "human_.csv", row.names = TRUE, header = TRUE)
 
 #Check if you can read it back 
 read.csv("human_.csv")
