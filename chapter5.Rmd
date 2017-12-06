@@ -49,6 +49,9 @@ dim(human_)
 ## **Show a graphical overview of the data and show summaries of the variables in the data.** 
 
 ```{r, echo=FALSE}
+#Since it seems even if in data wrangling i removed NA data, it setill shows in my .csv I will load data from provided url to proced 
+human_ <- read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", header = TRUE, sep = ",")
+
 library(GGally)
 #Visual obervation of the "human_" variables
 ggpairs(human_)
@@ -57,7 +60,9 @@ ggpairs(human_)
 summary(human_)
 ```
 
- - 
+ - With a quick overview of the data, observing how the pairs of the data relate to each other, you can see that few are related with each other. The ones that immediatelly you can see that while one changes the other one changes in the oposite direction are the percentage of Maternity Mortality with Edu2.FM, Edu.Exp, Life.Exp, GNI. Relation that makes sense, since if you decide to be a mom in early stages of your life that clearly limits the other variables.   
+ 
+ - The GNI (gross national income per capita) is also a interesting vriable to see with what it related with. We can notice this gross income is positively related with Educ.exp, life.exp and amount of Edu2.FM.
  
  
 ```{r, echo=FALSE}
@@ -69,44 +74,41 @@ cor_matrix <-cor(human_) %>% round(digits = 2)
 cor_matrix
 
 #visualize it with corrplot
-corrplot(cor_matrix, method = "color", tl.col = "red", tl.srt = 45)
+corrplot(cor_matrix, method = "color", type = "upper", tl.col = "red", tl.srt = 45)
 
 ```
 
-- Calculating the correlation matrix one can notice that most of the variables are not correlated in any way, and the ones that are show are positevely correlated. This is the case of GNI and Edu.Exp (correlation coefficient of 0.55), GNI and Life.Exp (0.57), Life.Edu and Edu.Exp (0.71)
+- Calculating the correlation matrix one can verify what was already mentioned when observing the pairs: the variables that higly correlate with each other are Mat.Mor and Life.Exp, followed by Mat.Mor and Edu.Exp / Edu2.Fm, and Ado.Birth and Life.Exp.
+
+- This is the case of GNI and Edu.Exp (correlation coefficient of 0.62), GNI and Life.Exp (0.63), Life.Edu and Edu.Exp (0.79)
 
 
 ## **Perform principal component analysis (PCA) on the not standardized human data.**
+### **Show the variability captured by the principal components.** 
 ```{r, echo = FALSE}
 # perform principal component analysis (with the SVD method)
-pca_human <- prcomp(human_)
-pca_human
+human_ <- read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", header = TRUE, sep = ",")
+
+pca_humanNS <- prcomp(human_)
+pca_humanNS
 
 ```
 
-
-### **Show the variability captured by the principal components.** 
 
 ### **Draw a biplot displaying the observations by the first two principal components (PC1 coordinate in x-axis, PC2 coordinate in y-axis), along with arrows representing the original variables.** 
 
 ```{r, echo = FALSE}
+
+pca_humanNS <- prcomp(human_)
+
 # create and print out a summary of pca_human
-s <- summary(pca_human)
+s <- summary(pca_humanNS)
 s
 
-# rounded percentages of variance captured by each PC
-pca_pr <- round(100*s$importance[2, ], digits = 1)
-pca_pr
-
-# create object pc_lab to be used as axis labels
-pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
-pc_lab
-
 # draw a biplot of the principal component representation and the original variables
-biplot(pca_human, choices = 1:2, cex = c(0.2,1), col = c("grey40", "deepblue"))
+biplot(pca_humanNS, choices = 1:2, cex = c(0.2,0.5), col = c("grey40", "red"))
 ```
 
-(0-2 points)
 
 ## **Standardize the variables in the human data and repeat the above analysis.** 
 ```{r, echo = FALSE}
@@ -117,22 +119,30 @@ human_std <- scale(human_)
 summary(human_std)
 
 # perform principal component analysis (with the SVD method)
-pca_human <- prcomp(human_std)
+pca_humanS <- prcomp(human_std)
+
+# create and print out a summary of pca_human
+SS <- summary(pca_humanS)
+SS
 
 # draw a biplot of the principal component representation and the original variables
-biplot(pca_human, choices = 1:2, cex = c(0.2,1), col = c("grey40", "deeppink2"))
+biplot(pca_humanS, choices = 1:2, cex = c(0.2,0.5), col = c("grey40", "blue"))
 ```
 
-Interpret the results of both analysis (with and without standardizing). Are the results different? Why or why not? 
+- Comparing the PCA plots of the non scaled and the scaled data, you can clearly see how the scaling works by making all the variables vary in the same range. This clearly helps to better observe the relation between the variables, otherwise as seen in the fisrt plot all the data will clump in one space position and make it impossible to identify the principal components that will help to classify the data. 
 
-Include captions in you plots where you describe the results by using not just your variable names, but the actual phenomenons they relate to. 
+- Focusing on the scaled data, you can now observe how the variables relate to each other, we can identifies 3 groups of variables that can be clearly separated by using the Principal components:
+  -  Edu.Exp, Life.Exp, Edu2.FM, GNI 
+  -  Mat.Mor and Ado.Birth
+  -  Labo.FM and Parli.F
 
-(0-4 points)
 
 ## **Personal interpretations of the first two principal component dimensions based on the biplot drawn after PCA on the standardized human data.** 
 
+- By observing how the varibales distribute along the principal component axis it seems PC1 relates mainly with time related variables, Life expenctancy, Education expectancy, Mat.Mor and Ado.Birth. 
 
-(0-2 points)
+- The PC2 relates more with the difference of genders in laboral life, education and politics. Since Edu2.FM lands in the zero values of PC2 one can assume there is an equilibrium in the amount of females and males with an higher education. 
+
 
 ## **Load the tea dataset from the package Factominer.**
 
@@ -156,6 +166,10 @@ dim(tea)
 
 #### To better explode Tea data, I decided to start by focusing on the type of Tea (purpose of the Tea in this case) the enquired people consume. 
 ```{r, echo=FALSE}
+library(dplyr)
+library(tidyr)
+library(GGally)
+library(ggplot2)
 #Let's start to focus on the type of tea enquires answered to consume
 keep_columns <- c("escape.exoticism", "spirituality", "healthy", "diuretic", "friendliness", "iron.absorption", "feminine", "sophisticated", "slimming", "exciting", "relaxing", "effect.on.health")
 
@@ -232,7 +246,7 @@ plot(mca, invisible=c("none"), habillage = "quali")
 plot(mca, invisible=c("ind"), habillage = "quali")
 ```
  
- - Now upong removal of the individuals in the plot you can better verify how the variables better relate with one or the other dimension. 
+ - Now upon removal of the individuals in the plot you can better verify how the variables better relate with one or the other dimension. 
  - In this case you can check how the sugar / no sugar variables equally related to both dimensions , while the Tea (green / black / earl grey) & how (tea bag / tea bag + unpackaged / unpackaged) seem to better relate with the dmension 2.
 
 

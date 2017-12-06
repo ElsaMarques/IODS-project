@@ -111,7 +111,7 @@ View(human_)
 #The dataset "human_" has now 155 observations of 8 variables. 
 
 #Save the human data in your data folder including the row names. 
-write.csv(human_, file = "human_.csv", row.names = TRUE, header = TRUE)
+write.csv(human_, file = "human_.csv", row.names = TRUE)
 
 #Check if you can read it back 
 read.csv("human_.csv")

@@ -13,7 +13,7 @@ output:
 *During this chapter the amount of information to be memorized is higher and more complex. The datacamp exercise, including the videos included in it touch the surface of what you can do to build graphs to visualize and analyse your data. Note that during this chapter you will definetily need to consult external help cheats (mostly provided during the datacamp and your mooc links)*
 
 
-## 1. _**Data wrangling exercise**_ 
+## _**Data wrangling exercise**_ 
 
 Load the data set provided (questionary answers regarding learning approaches and students accomplishments in a statistics course):
  
@@ -38,7 +38,7 @@ learning2014 <- read.csv("learning2014.csv")
         - deep_questions , surface_questions , strategic_questions 
         
 
-2. _**How to extract information from data**_
+## _**How to extract information from data**_
 
 Since the full data set can be overwelming to explore, viewing the structure, summary and the first values of the data can be helpful to identify what are your main interests in this questionary answers. 
 
@@ -58,10 +58,10 @@ summary(learning2014)
 head(learning2014)
 ```
 
-A careful observation of the loaded data shows you that from all the 63 original variables I filtered 7 variables of interest (Gender , Age, Attitude, Points, Deep questions, Surface questions, Strategic questions). 
+- A careful observation of the loaded data shows you that from all the 63 original variables I filtered 7 variables of interest (Gender , Age, Attitude, Points, Deep questions, Surface questions, Strategic questions). 
 
 
-_**View data in Plots format**_
+### _**View data in Plots format**_
 
 Graphs to visualize the overall relationships betwwen all the selected variables 
 
@@ -94,7 +94,7 @@ p3
 
 ```
 
-You can verify in the graph how the correlation trend varies between female (red line) and male (blue line). The grey area in the graph shows you how this data varies. 
+- You can verify in the graph how the correlation trend varies between female (red line) and male (blue line). The grey area in the graph shows you how this data varies. 
 
 
 ```{r}
@@ -106,7 +106,7 @@ summary(my_model)
 
 ```
 
-Analyses of the linear regression tell you that by each attitude point up the students have a chance of getting mote 0.34 points. This is the more significant relationship with the points obtained (p = 0.001)
+- Analyses of the linear regression tell you that by each attitude point up the students have a chance of getting mote 0.34 points. This is the more significant relationship with the points obtained (p = 0.001)
 
 
 ```{r}
@@ -118,15 +118,15 @@ summary(my_model)
 ```
 
 
-_**Graphical model validation**_
+### _**Graphical model validation**_
 
 
 
-_**Residuals vs Fitted plot**_
+### _**Residuals vs Fitted plot**_
 
 
 
-_**Normal Q-Q plot**_
+### _**Normal Q-Q plot**_
 
 ```{r}
 library(ggfortify)
